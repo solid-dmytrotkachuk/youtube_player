@@ -236,7 +236,6 @@ class _YoutubePlayerState extends State<YoutubePlayer> {
         SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
         controller.pause();
         Navigator.of(context, rootNavigator: true).pop();
-        controller.reload();
       } else {
         SystemChrome.setEnabledSystemUIOverlays([]);
         controller.pause();

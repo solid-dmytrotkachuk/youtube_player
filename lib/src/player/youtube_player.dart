@@ -225,7 +225,6 @@ class _YoutubePlayerState extends State<YoutubePlayer> {
       }
     }
     if (controller.value.toggleFullScreen) {
-      print('===================UPDATED================');
       controller.updateValue(
         controller.value.copyWith(
           toggleFullScreen: false,
@@ -233,12 +232,10 @@ class _YoutubePlayerState extends State<YoutubePlayer> {
         ),
       );
       if (controller.value.isFullScreen) {
-        print('===================EXIT_FULLSCREEN================');
         SystemChrome.setEnabledSystemUIOverlays(SystemUiOverlay.values);
         SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
         Navigator.of(context, rootNavigator: true).pop();
       } else {
-        print('===================ENTER_FULLSCREEN================');
         SystemChrome.setEnabledSystemUIOverlays([]);
         controller.pause();
 
@@ -283,64 +280,55 @@ class _YoutubePlayerState extends State<YoutubePlayer> {
 
   @override
   Widget build(BuildContext context) {
-    return WillPopScope(
-      onWillPop: () async {
-        if (controller.value.isFullScreen) {
-          controller.toggleFullScreenMode();
-          return false;
-        }
-        return true;
-      },
-      child: Material(
-        elevation: 0,
-        color: Colors.black,
-        child: InheritedYoutubePlayer(
-          controller: controller,
-          child: Container(
-            color: Colors.black,
-            width: widget.width ?? MediaQuery.of(context).size.width,
-            child: _buildPlayer(
-              errorWidget: Container(
-                color: Colors.black87,
-                padding: const EdgeInsets.symmetric(
-                    horizontal: 40.0, vertical: 20.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Row(
-                      children: [
-                        const Icon(
-                          Icons.error_outline,
-                          color: Colors.white,
-                        ),
-                        const SizedBox(width: 5.0),
-                        Expanded(
-                          child: Text(
-                            errorString(
-                              controller.value.errorCode,
-                              videoId: controller.metadata.videoId ??
-                                  controller.initialVideoId,
-                            ),
-                            style: const TextStyle(
-                              color: Colors.white,
-                              fontWeight: FontWeight.w300,
-                              fontSize: 15.0,
-                            ),
+    return Material(
+      elevation: 0,
+      color: Colors.black,
+      child: InheritedYoutubePlayer(
+        controller: controller,
+        child: Container(
+          color: Colors.black,
+          width: widget.width ?? MediaQuery.of(context).size.width,
+          child: _buildPlayer(
+            errorWidget: Container(
+              color: Colors.black87,
+              padding: const EdgeInsets.symmetric(
+                  horizontal: 40.0, vertical: 20.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Row(
+                    children: [
+                      const Icon(
+                        Icons.error_outline,
+                        color: Colors.white,
+                      ),
+                      const SizedBox(width: 5.0),
+                      Expanded(
+                        child: Text(
+                          errorString(
+                            controller.value.errorCode,
+                            videoId: controller.metadata.videoId ??
+                                controller.initialVideoId,
+                          ),
+                          style: const TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.w300,
+                            fontSize: 15.0,
                           ),
                         ),
-                      ],
-                    ),
-                    const SizedBox(height: 16.0),
-                    Text(
-                      'Error Code: ${controller.value.errorCode}',
-                      style: const TextStyle(
-                        color: Colors.grey,
-                        fontWeight: FontWeight.w300,
                       ),
+                    ],
+                  ),
+                  const SizedBox(height: 16.0),
+                  Text(
+                    'Error Code: ${controller.value.errorCode}',
+                    style: const TextStyle(
+                      color: Colors.grey,
+                      fontWeight: FontWeight.w300,
                     ),
-                  ],
-                ),
+                  ),
+                ],
               ),
             ),
           ),

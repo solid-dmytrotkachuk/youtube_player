@@ -227,13 +227,14 @@ class _YoutubePlayerState extends State<YoutubePlayer> {
     if (controller.value.toggleFullScreen) {
       controller.updateValue(
         controller.value.copyWith(
-          toggleFullScreen: false,
+          toggleFullScreen: true,
           isControlsVisible: false,
         ),
       );
       if (controller.value.isFullScreen) {
         SystemChrome.setEnabledSystemUIOverlays(SystemUiOverlay.values);
         SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
+        controller.pause();
         Navigator.of(context, rootNavigator: true).pop();
       } else {
         SystemChrome.setEnabledSystemUIOverlays([]);

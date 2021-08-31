@@ -170,6 +170,7 @@ class _FullScreenYoutubePlayerState extends State<_FullScreenYoutubePlayer> {
         widget.controller.value.copyWith(isFullScreen: false),
       ),
     );
+    Navigator.of(context, rootNavigator: true).pop();
     super.dispose();
   }
 }

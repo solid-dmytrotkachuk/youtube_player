@@ -37,9 +37,9 @@ class _LiveBottomBarState extends State<LiveBottomBar> {
     _controller = YoutubePlayerController.of(context);
     if (_controller == null) {
       assert(
-        widget.controller != null,
-        '\n\nNo controller could be found in the provided context.\n\n'
-        'Try passing the controller explicitly.',
+      widget.controller != null,
+      '\n\nNo controller could be found in the provided context.\n\n'
+          'Try passing the controller explicitly.',
       );
       _controller = widget.controller;
     }
@@ -56,10 +56,10 @@ class _LiveBottomBarState extends State<LiveBottomBar> {
     if (mounted) {
       setState(() {
         _currentSliderPosition =
-            _controller.metadata.duration.inMilliseconds == 0
-                ? 0
-                : _controller.value.position.inMilliseconds /
-                    _controller.metadata.duration.inMilliseconds;
+        _controller.metadata.duration.inMilliseconds == 0
+            ? 0
+            : _controller.value.position.inMilliseconds /
+            _controller.metadata.duration.inMilliseconds;
       });
     }
   }
@@ -83,8 +83,8 @@ class _LiveBottomBarState extends State<LiveBottomBar> {
                   _controller.seekTo(
                     Duration(
                       milliseconds:
-                          (_controller.metadata.duration.inMilliseconds * value)
-                              .round(),
+                      (_controller.metadata.duration.inMilliseconds * value)
+                          .round(),
                     ),
                   );
                 },

@@ -295,7 +295,7 @@ class _YoutubePlayerState extends State<YoutubePlayer> {
           controller: controller,
           child: Container(
             color: Colors.black,
-            width: widget.width,
+            width: widget.width ?? MediaQuery.of(context).size.width,
             child: _buildPlayer(
               errorWidget: Container(
                 color: Colors.black87,

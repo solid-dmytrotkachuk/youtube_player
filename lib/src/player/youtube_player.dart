@@ -225,6 +225,7 @@ class _YoutubePlayerState extends State<YoutubePlayer> {
       }
     }
     if (controller.value.toggleFullScreen) {
+      print('===================UPDATED================');
       controller.updateValue(
         controller.value.copyWith(
           toggleFullScreen: false,
@@ -232,10 +233,12 @@ class _YoutubePlayerState extends State<YoutubePlayer> {
         ),
       );
       if (controller.value.isFullScreen) {
+        print('===================EXIT_FULLSCREEN================');
         SystemChrome.setEnabledSystemUIOverlays(SystemUiOverlay.values);
-        SystemChrome.setPreferredOrientations(DeviceOrientation.values);
+        SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
         Navigator.of(context, rootNavigator: true).pop();
       } else {
+        print('===================ENTER_FULLSCREEN================');
         SystemChrome.setEnabledSystemUIOverlays([]);
         controller.pause();
 

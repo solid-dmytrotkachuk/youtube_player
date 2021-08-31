@@ -234,26 +234,7 @@ class _YoutubePlayerState extends State<YoutubePlayer> {
       if (controller.value.isFullScreen) {
         SystemChrome.setEnabledSystemUIOverlays(SystemUiOverlay.values);
         SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
-        controller.pause();
-
-        Duration _cachedPosition = controller.value.position;
-        final _videoId = controller.metadata.videoId;
-        _cachedWebController = controller.value.webViewController;
-        controller.reset();
-
-        _cachedPosition = controller.value.position;
-
-        controller.load(_videoId, startAt: _cachedPosition.inSeconds);
-
-        controller
-          ..updateValue(
-            controller.value.copyWith(webViewController: _cachedWebController),
-          )
-          ..seekTo(_cachedPosition);
-        Future.delayed(const Duration(seconds: 1), () => controller.play());
-
         Navigator.of(context, rootNavigator: true).pop();
-
       } else {
         SystemChrome.setEnabledSystemUIOverlays([]);
         controller.pause();
@@ -314,7 +295,7 @@ class _YoutubePlayerState extends State<YoutubePlayer> {
           controller: controller,
           child: Container(
             color: Colors.black,
-            width: widget.width ?? MediaQuery.of(context).size.width,
+            width: widget.width,
             child: _buildPlayer(
               errorWidget: Container(
                 color: Colors.black87,
